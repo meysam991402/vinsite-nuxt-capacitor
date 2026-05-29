@@ -1,0 +1,79 @@
+# .github/workflows/android-build.yml
+name: Android Build and Deploy
+
+# این workflow زمانی اجرا می‌شود که تغییری به شاخه main پوش شود
+# یا زمانی که دستی آن را اجرا کنید (workflow_dispatch)
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    # سیستم عامل مورد استفاده برای اجرای job
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. گرفتن آخرین کد پروژه از ریپازیتوری
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. تنظیم محیط Node.js (نسخه 20 یا بالاتر توصیه می‌شود)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm # استفاده از کش npm برای سرعت بخشیدن به نصب وابستگی‌ها
+
+      # 3. نصب تمام وابستگی‌های پروژه (npm packages)
+      - name: Install dependencies
+        run: npm ci # ci سریع‌تر و مطمئن‌تر از install برای CI/CD است
+
+      # 4. Build کردن پروژه Nuxt برای حالت استاتیک (SPA)
+      # اگر از متغیر محیطی برای SSR استفاده می‌کنید، اینجا آن را تنظیم کنید
+      # NUXT_APP_MOBILE=true npx nuxt generate
+      - name: Build Nuxt App
+        run: npm run generate
+        # اگر در nuxt.config.ts از متغیر محیطی استفاده کردید، این خط را فعال کنید:
+        # env:
+        #   NUXT_APP_MOBILE: 'true'
+
+      # 5. Sync کردن فایل‌های build شده Nuxt با پروژه Capacitor Android
+      - name: Sync Capacitor Android
+        run: npx cap sync android
+
+      # 6. تنظیم محیط Java (برای Gradle)
+      # نسخه 17 برای اکثر پروژه‌های اندروید مناسب است
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # 7. تنظیم Android SDK (Command-line Tools)
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      # 8. فعال کردن قابلیت اجرای فایل gradlew
+      - name: Grant execute permission for gradlew
+        run: chmod +x android/gradlew
+
+      # 9. Build کردن فایل AAB (برای انتشار در Google Play / بازار)
+      # اگر می‌خواهید APK بگیرید، از assembleRelease استفاده کنید
+      - name: Build Release AAB
+        working-directory: android # وارد پوشه android شوید
+        # برای AAB:
+        run: ./gradlew bundleRelease
+        # برای APK:
+        # run: ./gradlew assembleRelease
+
+      # 10. آپلود خروجی build شده به عنوان Artifact
+      # این فایل را می‌توانید از GitHub دانلود کنید
+      - name: Upload AAB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-aab # نام آرتیفکت (برای دانلود)
+          path: android/app/build/outputs/bundle/release/ # مسیر فایل AAB
+          # اگر APK می‌گیرید، مسیر را تغییر دهید:
+          # path: android/app/build/outputs/apk/release/

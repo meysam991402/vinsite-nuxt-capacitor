@@ -1,0 +1,86 @@
+@import "tailwindcss";
+@layer base {
+  html,
+  body,
+  * {
+    font-family: yekan-medium;
+  }
+  summary::marker {
+    content: "";
+  }
+  button,
+  a {
+    cursor: pointer;
+  }
+  a {
+    display: inline-block;
+  }
+  address {
+    font-style: normal;
+  }
+  ins {
+    text-decoration: none;
+  }
+  input,
+  button,
+  textarea {
+    outline: none;
+  }
+  .container {
+    width: 1400px !important;
+    margin-inline: auto;
+  }
+
+  @media only screen and (max-width: 1500px) {
+    .container {
+      width: 85% !important;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .container {
+      width: 90% !important;
+    }
+  }
+  @media only screen and (max-width: 648px) {
+    .container {
+      width: 95% !important;
+    }
+  }
+}
+@theme {
+  --color-gray-e2: #e2e1e1;
+  --color-green28: #28a745;
+  --color-gray-6d: #6d6d6d;
+  --font-fa-solid: fa-solid;
+  --font-yekan-medium: yekan-medium;
+  --font-yekan-bold: yekan-bold;
+  --font-number: number;
+}
+@font-face {
+  font-family: fa-solid;
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("/fonts/fa-solid-900.e8a427e1.woff2") format("woff2");
+}
+@font-face {
+  font-family: yekan-bold;
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("/fonts/Yekan-Bakh-Bold.fb96c80e.woff") format("woff");
+}
+@font-face {
+  font-family: yekan-medium;
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("/fonts/Yekan-Bakh-Medium.597c8017.woff") format("woff");
+}
+@font-face {
+  font-family: number;
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("/fonts/number.woff2") format("woff2");
+}

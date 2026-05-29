@@ -1,0 +1,44 @@
+<template>
+  <svg
+    width="64px"
+    height="64px"
+    viewBox="0 0 20 20"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    fill="#000000"
+  >
+    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+      <title>time / 21 - time, clock, date, time icon</title>
+      <g
+        id="Free-Icons"
+        stroke="none"
+        stroke-width="1"
+        fill="none"
+        fill-rule="evenodd"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <g
+          transform="translate(-451.000000, -674.000000)"
+          id="Group"
+          stroke="#808080"
+          stroke-width="2"
+        >
+          <g transform="translate(449.000000, 672.000000)" id="Shape">
+            <path
+              d="M12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 Z"
+            ></path>
+            <polyline points="12 8 12 12 9 15"></polyline>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>

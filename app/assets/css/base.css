@@ -1,0 +1,136 @@
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #000;
+  outline: 0 solid slategrey;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: rgb(216, 216, 216);
+}
+.paginate .pagination-container {
+  column-gap: 10px;
+}
+.paginate .paginate-buttons {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: rgb(242, 242, 242);
+  border: 1px solid rgb(217, 217, 217);
+  color: black;
+}
+.pagination-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #c4c4c496;
+}
+.page-link {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+}
+.page-item.active {
+  background-color: var(--color-gray-6d);
+  color: white;
+  @media only screen and (max-width: 648px) {
+    *::-webkit-scrollbar {
+      width: 0.3em;
+      height: 0.3em;
+    }
+  }
+}
+.loader {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: #e0e0e0 #a0a0a0 transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px solid;
+  border-color: transparent #00f57f #00bc61;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+div:where(.swal2-container) {
+  width: 100vw;
+}
+.swal2-title {
+  font-size: 22px;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+    background-color: #000;
+    color: white;
+  }
+}
+@media only screen and (max-width: 648px) {
+  *::-webkit-scrollbar {
+    width: 0.3em;
+    height: 0.3em;
+  }
+  .page-item {
+    width: 30px;
+    height: 30px;
+  }
+  .swal2-title {
+    font-size: 20px;
+  }
+}
+.ck-editor img {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.mask-size-full {
+  mask-size: 100% 100%;
+  mask-position: center;
+}
