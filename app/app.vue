@@ -83,22 +83,19 @@ function scrollTop() {
     <main>
       <NuxtPage />
       <ClientOnly>
-        <button
-          type="button"
-          :class="[
-            {
-              'bottom-20! lg:bottom-2':
-                scrollEnabled && route.name == 'product-slug',
-            },
-            {
-              'bottom-16 lg:bottom-2':
-                scrollEnabled && route.name != 'produc-slug',
-            },
-            { '-bottom-14': !scrollEnabled },
-          ]"
+        <button type="button" :class="[
+          {
+            'bottom-20! lg:bottom-2':
+              scrollEnabled && route.name == 'product-slug',
+          },
+          {
+            'bottom-16 lg:bottom-2':
+              scrollEnabled && route.name != 'produc-slug',
+          },
+          { '-bottom-14': !scrollEnabled },
+        ]"
           class="animate-bounce z-10 fixed rounded-full h-10 w-10 sm:h-11 sm:w-11 left-3.5 border-4 border-neutral-200 bg-neutral-500 flex items-center justify-center transition-all duration-500 ease-linear"
-          @click="scrollTop"
-        >
+          @click="scrollTop">
           <IconsArrowTop class="*:stroke-white w-7 h-w-7" />
         </button>
       </ClientOnly>
