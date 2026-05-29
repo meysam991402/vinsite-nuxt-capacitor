@@ -1,0 +1,1 @@
+# vinsite-nuxt-capacitor
