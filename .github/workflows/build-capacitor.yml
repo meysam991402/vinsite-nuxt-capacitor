@@ -29,6 +29,19 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      # مرحله جدید: اعمال تنظیمات Java 17 به فایل capacitor-cordova-android-plugins/build.gradle قبل از sync
+      - name: Prepare Capacitor Gradle files
+        run: |
+          # Create android/gradle.properties if it doesn't exist
+          touch android/gradle.properties
+          # Add the suppress warning line
+          echo "android.suppressUnsupportedCompileSdk=36" >> android/gradle.properties
+          # Ensure capacitor-cordova-android-plugins/build.gradle exists and modify it if needed
+          if [ -f "android/capacitor-cordova-android-plugins/build.gradle" ]; then
+            sed -i 's/sourceCompatibility JavaVersion.VERSION_21/sourceCompatibility JavaVersion.VERSION_17/g' android/capacitor-cordova-android-plugins/build.gradle
+            sed -i 's/targetCompatibility JavaVersion.VERSION_21/targetCompatibility JavaVersion.VERSION_17/g' android/capacitor-cordova-android-plugins/build.gradle
+          fi
+
       - name: Install dependencies
         run: npm ci
 
@@ -37,11 +50,6 @@ jobs:
 
       - name: Sync Capacitor
         run: npx cap sync android
-
-      # این مرحله بسیار مهم است: اطمینان حاصل می‌کند که تنظیمات Java در فایل capacitor.build.gradle
-      # همیشه روی نسخه 17 باشد، حتی اگر cap sync آن را بازنویسی کند.
-      - name: Force Java 17 in Capacitor Gradle
-        run: sed -i 's/JavaVersion.VERSION_21/JavaVersion.VERSION_17/g' android/capacitor.build.gradle
 
       - name: Grant execute permission for gradlew
         run: chmod +x android/gradlew
